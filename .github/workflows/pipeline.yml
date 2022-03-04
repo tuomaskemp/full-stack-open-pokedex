@@ -18,6 +18,10 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "nameless-woodland-24434"
           heroku_email: "t-kemppainen@outlook.com"
+          healthcheck: "https://nameless-woodland-24434.herokuapp.com/health"
+          checkstring: "ok"
+          delay: 5
+          rollbackonhealthcheckfailed: true
       - name: npm install
         run: npm install
       - name: lint
