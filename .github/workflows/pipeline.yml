@@ -18,8 +18,8 @@ jobs:
           node-version: '16'
       - uses: akhileshns/heroku-deploy@v3.12.12
         if: |
-          ${{ github.event_name == 'push' &&
-          !contains(join(github.event.commits.*.message, ', '), '#skip') }}
+          github.event_name == 'push' &&
+          !contains(join(github.event.commits.*.message, ', '), '#skip')
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "nameless-woodland-24434"
@@ -45,8 +45,8 @@ jobs:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
         if: |
-          ${{ github.event_name == 'push' &&
-          !contains(join(github.event.commits.*.message, ', '), '#skip') }}
+          github.event_name == 'push' &&
+          !contains(join(github.event.commits.*.message, ', '), '#skip')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: 'patch'
