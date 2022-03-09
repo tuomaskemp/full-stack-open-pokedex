@@ -51,6 +51,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: 'patch'
       - uses: 8398a7/action-slack@v3
+        if: |
+          github.event_name == 'push' &&
+          !contains(join(github.event.commits.*.message, ', '), '#skip')
         with:
           status: custom
           fields: workflow,job,commit,repo,ref,author,took
